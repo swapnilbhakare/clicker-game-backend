@@ -8,7 +8,14 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allows all origins
+    methods: "*", // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Allow credentials (cookies, authentication headers)
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URI, {
